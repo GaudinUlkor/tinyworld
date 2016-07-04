@@ -7,10 +7,19 @@
 			data-sap-ui-libs="sap.ui.commons, sap.ui.table" 
 			data-sap-ui-theme="sap_bluecrystal">
 	</script>
+	<script src="./util.js" > </script>
 	<script>
 		var oModel = new sap.ui.model.odata.ODataModel("/euro.xsodata", true);
-		var oTable = new sap.ui.table.Table({ title: "European Countries" });
-		oTable.addColumn(new sap.ui.table.Column({ label: "Country Name", template: "name" }));
+		var oTable = new sap.ui.table.Table({	
+			title: "European Countries",
+			visibleRowCount: 5, 
+			id: "tinytab",
+            toolbar: new sap.ui.commons.Toolbar({items: [ new sap.ui.commons.Button({	text: "Add Country", 
+            																			press: openFirstDialog})
+    		]})
+		});
+		oTable.addColumn(new sap.ui.table.Column({	label: "Country Name", 
+													template: "name" }));
 		oTable.setModel(oModel); 
 		oTable.bindRows("/euro"); 
 		oTable.placeAt("content");
